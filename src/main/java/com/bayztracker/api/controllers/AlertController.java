@@ -18,14 +18,14 @@ public class AlertController {
         return ResponseEntity.status(HttpStatus.OK).body(null); // TODO: 10/15/2022
     }
 
-    @PatchMapping()
-    public void editAlert() {}
-
-    @PatchMapping()
-    public void acknowledgeAlert() {}
-
-    @PatchMapping()
-    public void cancelAlert() {}
+//    @PatchMapping()
+//    public void editAlert() {}
+//
+//    @PatchMapping()
+//    public void acknowledgeAlert() {}
+//
+//    @PatchMapping()
+//    public void cancelAlert() {}
 
     @DeleteMapping("/{id}")
     public void deleteAlert(@PathVariable Long id) {}

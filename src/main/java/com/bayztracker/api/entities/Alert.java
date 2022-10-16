@@ -1,20 +1,22 @@
 package com.bayztracker.api.entities;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
 
+@Entity
 public class Alert {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @ManyToOne
     private Currency currency;
     private BigDecimal targetPrice;
     private Date createdAt;
     private Status status;
+
+    public Alert() {}
 
     public Alert(Currency currency, BigDecimal targetPrice, Date createdAt, Status status) {
         this.currency = currency;

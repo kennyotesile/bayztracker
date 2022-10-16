@@ -18,9 +18,9 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         return new ErrorMessage(HttpStatus.FORBIDDEN); // TODO: 10/15/2022 instantiate errorMessageProperly
     }
 
-    @ExceptionHandler(HttpMessageNotReadableException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ErrorMessage handleHttpMessageNotReadableException() {
-        return new ErrorMessage(HttpStatus.BAD_REQUEST);
-    }
+//    @ExceptionHandler(HttpMessageNotReadableException.class)
+//    @ResponseStatus(HttpStatus.BAD_REQUEST)
+//    public ErrorMessage handleHttpMessageNotReadableException() {
+//        return new ErrorMessage(HttpStatus.BAD_REQUEST);
+//    }
 }
