@@ -1,0 +1,26 @@
+version: "3.9"
+
+services:
+  spring-boot-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    restart: always
+    depends_on:
+      - mysql-db
+    networks:
+      - spring-boot-mysql
+
+  mysql-db:
+    image: mysql:8.0.31
+    env_file: .env
+    ports:
+      - "3306:3306"
+    restart: always
+    networks:
+      - spring-boot-mysql
+
+networks:
+  spring-boot-mysql:
