@@ -1,14 +1,21 @@
 package com.bayztracker.api.entities;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.math.BigDecimal;
 import java.util.Date;
 
 // TODO: 13/10/2022 Don't support [ETH, LTC, ZKN, MRD, LPR, GBZ]
 public class Currency {
-    String name;
-    String symbol;
-    BigDecimal currentPrice;
-    Date createdTime;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String name;
+    private String symbol;
+    private BigDecimal currentPrice;
+    private Date createdTime;
     boolean enabled;
 
     public Currency(String name, String symbol, BigDecimal currentPrice, Date createdTime, boolean enabled) {
