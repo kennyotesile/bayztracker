@@ -13,7 +13,7 @@ public class Alert {
     @ManyToOne
     private Currency currency;
     private BigDecimal targetPrice;
-    private Date createdAt;
+    private Date createdAt = new Date();
     private Status status;
 
     public Alert() {}

@@ -5,9 +5,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 
-// TODO: 13/10/2022 Don't support [ETH, LTC, ZKN, MRD, LPR, GBZ]
 @Entity
 public class Currency {
 
@@ -17,14 +17,14 @@ public class Currency {
     private String name;
     private String symbol;
     private BigDecimal currentPrice;
-    private Date createdTime;
+    private Date createdTime = new Date();
     boolean enabled;
 
     public Currency() {}
 
     public Currency(String name, String symbol, BigDecimal currentPrice, Date createdTime, boolean enabled) {
         this.name = name;
-        this.symbol = symbol;
+        this.symbol = symbol.toUpperCase();
         this.currentPrice = currentPrice;
         this.createdTime = createdTime;
         this.enabled = enabled;

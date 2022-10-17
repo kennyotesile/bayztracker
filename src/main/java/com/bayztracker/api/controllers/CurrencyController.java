@@ -3,6 +3,7 @@ package com.bayztracker.api.controllers;
 import com.bayztracker.api.entities.Currency;
 import com.bayztracker.api.services.CurrencyService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -13,11 +14,17 @@ public class CurrencyController {
     CurrencyService currencyService;
 
     @PostMapping()
-    public void addCurrency(@RequestBody Currency currency) {}
+    public ResponseEntity<Currency> addCurrency(@RequestBody Currency currency) {
+        Currency createdCurrency = currencyService.add(currency);
+        return ResponseEntity.ok().body(createdCurrency);
+    }
 
-    @GetMapping("/{id}")
-    public void queryCurrency(@PathVariable Long id) {}
+    @GetMapping("/{symbol}")
+    public ResponseEntity<Object> queryCurrency(@PathVariable(required = false) String symbol) {
+        Object currencyOrList = currencyService.query(symbol);
+        return ResponseEntity.ok().body(currencyOrList);
+    }
 
-    @DeleteMapping("/{id}")
-    public void removeCurrency(@PathVariable Long id) {}
+    @DeleteMapping("/{symbol}")
+    public void removeCurrency(@PathVariable String symbol) {}
 }
