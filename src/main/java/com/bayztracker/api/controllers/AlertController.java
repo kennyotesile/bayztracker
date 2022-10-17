@@ -9,6 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 @RestController
 @RequestMapping("/alerts")
 public class AlertController {
@@ -22,15 +24,12 @@ public class AlertController {
         return ResponseEntity.status(HttpStatus.OK).body(createdAlert); // TODO: 10/15/2022
     }
 
-//    @PatchMapping()
-//    public void editAlert() {}
-//
-//    @PatchMapping()
-//    public void acknowledgeAlert() {}
-//
-//    @PatchMapping()
-//    public void cancelAlert() {}
+    @PutMapping("/{id}")
+    public void editAlert(@RequestParam(required = false) String currencySymbol) {}
 
     @DeleteMapping("/{id}")
     public void deleteAlert(@PathVariable Long id) {}
+
+    @PatchMapping("/{id}/status")
+    public void editStatus() {}
 }

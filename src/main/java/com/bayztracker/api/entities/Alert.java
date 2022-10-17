@@ -1,5 +1,8 @@
 package com.bayztracker.api.entities;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -13,16 +16,29 @@ public class Alert {
     @ManyToOne
     private Currency currency;
     private BigDecimal targetPrice;
-    private Date createdAt = new Date();
+    @CreationTimestamp
+    private Date createdAt;
+    @UpdateTimestamp
+    private Date updatedAt;
     private Status status;
 
     public Alert() {}
 
-    public Alert(Currency currency, BigDecimal targetPrice, Date createdAt, Status status) {
+    public Alert(Long id, Currency currency, BigDecimal targetPrice, Date createdAt, Date updatedAt, Status status) {
+        this.id = id;
         this.currency = currency;
         this.targetPrice = targetPrice;
         this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
         this.status = status;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Currency getCurrency() {
@@ -47,6 +63,14 @@ public class Alert {
 
     public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public Date getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
     }
 
     public Status getStatus() {

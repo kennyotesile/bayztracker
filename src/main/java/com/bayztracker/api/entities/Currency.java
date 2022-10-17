@@ -1,11 +1,13 @@
 package com.bayztracker.api.entities;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.Date;
 
 @Entity
@@ -17,17 +19,30 @@ public class Currency {
     private String name;
     private String symbol;
     private BigDecimal currentPrice;
-    private Date createdTime = new Date();
+    @CreationTimestamp
+    private Date createdTime;
+    @UpdateTimestamp
+    private Date updatedTime;
     boolean enabled = false;
 
     public Currency() {}
 
-    public Currency(String name, String symbol, BigDecimal currentPrice, Date createdTime, boolean enabled) {
+    public Currency(Long id, String name, String symbol, BigDecimal currentPrice, Date createdTime, Date updatedTime, boolean enabled) {
+        this.id = id;
         this.name = name;
-        this.symbol = symbol.toUpperCase();
+        this.symbol = symbol;
         this.currentPrice = currentPrice;
         this.createdTime = createdTime;
+        this.updatedTime = updatedTime;
         this.enabled = enabled;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -60,6 +75,14 @@ public class Currency {
 
     public void setCreatedTime(Date createdTime) {
         this.createdTime = createdTime;
+    }
+
+    public Date getUpdatedTime() {
+        return updatedTime;
+    }
+
+    public void setUpdatedTime(Date updatedTime) {
+        this.updatedTime = updatedTime;
     }
 
     public boolean isEnabled() {
