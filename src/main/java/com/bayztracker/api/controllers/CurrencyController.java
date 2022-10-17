@@ -19,7 +19,7 @@ public class CurrencyController {
         return ResponseEntity.ok().body(createdCurrency);
     }
 
-    @GetMapping("/{symbol}")
+    @GetMapping(value = {"", "/{symbol}"})
     public ResponseEntity<Object> queryCurrency(@PathVariable(required = false) String symbol) {
         Object currencyOrList = currencyService.query(symbol);
         return ResponseEntity.ok().body(currencyOrList);

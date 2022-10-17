@@ -18,7 +18,7 @@ public class Currency {
     private String symbol;
     private BigDecimal currentPrice;
     private Date createdTime = new Date();
-    boolean enabled;
+    boolean enabled = false;
 
     public Currency() {}
 
