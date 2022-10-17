@@ -1,4 +1,4 @@
-package com.bayztracker.api.exceptionhandlers;
+package com.bayztracker.api.exceptions;
 
 import org.springframework.http.HttpStatus;
 
@@ -19,7 +19,7 @@ public class ErrorMessage {
         this();
         this.status = status;
         this.statusCode = status.value();
-        this.message = "Unexpected error";
+        this.message = "Unexpected error occurred";
     }
 
     public ErrorMessage(HttpStatus status, String message) {

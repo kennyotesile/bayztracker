@@ -1,7 +1,5 @@
-package com.bayztracker.api.exceptionhandlers;
+package com.bayztracker.api.exceptions;
 
-import com.bayztracker.api.exceptions.NotFoundException;
-import com.bayztracker.api.exceptions.UnsupportedCurrencyCreationException;
 import org.springframework.beans.TypeMismatchException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -32,6 +30,11 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(UnsupportedCurrencyCreationException.class)
     public ResponseEntity<ErrorMessage> handleUnsupportedCurrencyCreation(UnsupportedCurrencyCreationException ex) {
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(new ErrorMessage(HttpStatus.CONFLICT, ex.getMessage())); // TODO: 10/15/2022 instantiate errorMessageProperly
+    }
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<ErrorMessage> handleIllegalArgument(IllegalArgumentException ex) {
         return ResponseEntity.status(HttpStatus.CONFLICT).body(new ErrorMessage(HttpStatus.CONFLICT, ex.getMessage())); // TODO: 10/15/2022 instantiate errorMessageProperly
     }
 }

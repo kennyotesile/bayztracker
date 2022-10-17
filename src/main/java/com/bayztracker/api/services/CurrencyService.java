@@ -2,8 +2,12 @@ package com.bayztracker.api.services;
 
 import com.bayztracker.api.entities.Currency;
 
+import java.util.List;
+
 public interface CurrencyService {
-    Object query(String symbol);
+    Currency query(String symbol);
+
+    List<Currency> query();
 
     Currency add(Currency currency);
 }

@@ -10,21 +10,28 @@ import java.util.Date;
 @Entity
 public class Alert {
 
+    public enum Status {
+        NEW,
+        TRIGGERED,
+        ACKED,
+        CANCELLED
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne
     private Currency currency;
     private BigDecimal targetPrice;
+    private Status status;
     @CreationTimestamp
     private Date createdAt;
     @UpdateTimestamp
     private Date updatedAt;
-    private Status status;
 
     public Alert() {}
 
-    public Alert(Long id, Currency currency, BigDecimal targetPrice, Date createdAt, Date updatedAt, Status status) {
+    public Alert(Long id, Currency currency, BigDecimal targetPrice, Status status, Date createdAt, Date updatedAt) {
         this.id = id;
         this.currency = currency;
         this.targetPrice = targetPrice;
@@ -57,6 +64,14 @@ public class Alert {
         this.targetPrice = targetPrice;
     }
 
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
     public Date getCreatedAt() {
         return createdAt;
     }
@@ -72,19 +87,4 @@ public class Alert {
     public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
     }
-
-    public Status getStatus() {
-        return status;
-    }
-
-    public void setStatus(Status status) {
-        this.status = status;
-    }
-}
-
-enum Status {
-    NEW,
-    TRIGGERED,
-    ACKED,
-    CANCELLED
 }

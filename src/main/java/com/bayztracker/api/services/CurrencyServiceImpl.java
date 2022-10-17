@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -29,14 +30,15 @@ public class CurrencyServiceImpl implements CurrencyService {
     }
 
     @Override
-    public Object query(String symbol) {
-        if (symbol != null) {
-            Optional<Currency> currency = currencyRepository.findBySymbol(symbol);
-            if (currency.isPresent())
-                return currency.get();
-            else throw new NotFoundException("Currency does not exist.");
-        } else {
-            return currencyRepository.findAll();
-        }
+    public Currency query(String symbol) {
+        Optional<Currency> currency = currencyRepository.findBySymbol(symbol);
+        if (currency.isPresent())
+            return currency.get();
+        else throw new NotFoundException("Currency does not exist.");
+    }
+
+    @Override
+    public List<Currency> query() {
+        return currencyRepository.findAll();
     }
 }

@@ -21,8 +21,10 @@ public class CurrencyController {
 
     @GetMapping(value = {"", "/{symbol}"})
     public ResponseEntity<Object> queryCurrency(@PathVariable(required = false) String symbol) {
-        Object currencyOrList = currencyService.query(symbol);
-        return ResponseEntity.ok().body(currencyOrList);
+        if (symbol != null)
+            return ResponseEntity.ok().body(currencyService.query(symbol));
+        else
+            return ResponseEntity.ok().body(currencyService.query());
     }
 
     @DeleteMapping("/{symbol}")
