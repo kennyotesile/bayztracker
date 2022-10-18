@@ -20,8 +20,7 @@ public class Alert {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @ManyToOne
-    @Column(nullable = false)
+    @ManyToOne(optional = false)
     private Currency currency;
     @Column(nullable = false)
     private BigDecimal targetPrice;
