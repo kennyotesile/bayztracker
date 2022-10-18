@@ -46,10 +46,8 @@ public class CurrencyServiceImpl implements CurrencyService {
                     throw new RecordAlreadyExistsException("Currency with specified name already exists.");
             } catch (NotFoundException ex2) {
                 currency.setSymbol(currency.getSymbol().toUpperCase());
-                return currencyRepository.save(currency);
             }
-
-
+            return currencyRepository.save(currency);
         }
     }
 
@@ -78,7 +76,7 @@ public class CurrencyServiceImpl implements CurrencyService {
             }
         }
 
-        if (symbol == null || symbol.replace("\\s+", "") == "" || symbol.replace("\\s+", "") == "null") {
+        if (symbol == null || symbol.replace("\\s+", "").equals("") || symbol.replace("\\s+", "").equals("null")) {
             throw new BadRequestException("Currency symbol must be valid");
         }
     }
