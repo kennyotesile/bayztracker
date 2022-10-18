@@ -10,4 +10,14 @@ public interface CurrencyService {
     List<Currency> query();
 
     Currency add(Currency currency);
+
+    void deleteBySymbol(String symbol);
+
+    void validateCurrency(Currency currency);
+
+    void validateCurrencySymbol(String symbol);
+
+    void validateCurrencyName(String name);
+
+    void validateCurrencyPrice(Object currencyPrice);
 }

@@ -21,9 +21,12 @@ public class Alert {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne
+    @Column(nullable = false)
     private Currency currency;
+    @Column(nullable = false)
     private BigDecimal targetPrice;
-    private Status status;
+    @Column(nullable = false)
+    private Status status = Status.NEW;
     @CreationTimestamp
     private Date createdAt;
     @UpdateTimestamp

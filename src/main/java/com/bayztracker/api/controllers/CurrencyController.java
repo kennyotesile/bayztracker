@@ -28,5 +28,7 @@ public class CurrencyController {
     }
 
     @DeleteMapping("/{symbol}")
-    public void removeCurrency(@PathVariable String symbol) {}
+    public void removeCurrency(@PathVariable String symbol) {
+        currencyService.deleteBySymbol(symbol);
+    }
 }

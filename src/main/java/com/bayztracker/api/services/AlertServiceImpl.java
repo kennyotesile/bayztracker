@@ -1,6 +1,7 @@
 package com.bayztracker.api.services;
 
 import com.bayztracker.api.entities.Alert;
+import com.bayztracker.api.entities.AlertRequestModel;
 import com.bayztracker.api.entities.Currency;
 import com.bayztracker.api.exceptions.NotFoundException;
 import com.bayztracker.api.repositories.AlertRepository;
@@ -10,7 +11,6 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -24,32 +24,61 @@ public class AlertServiceImpl implements AlertService {
     CurrencyService currencyService;
 
     @Override
-    public Alert create(Map<String, Object> body) {
-        String currencySymbol = (String) body.get("currencySymbol");
+    public Alert create(AlertRequestModel alertRequestModel) {
+        String currencySymbol = alertRequestModel.getCurrencySymbol();
+
+        currencyService.validateCurrencySymbol(currencySymbol);
         Currency currency = currencyService.query(currencySymbol);
 
         Alert alert = new Alert();
+
         alert.setCurrency(currency);
-        alert.setTargetPrice(new BigDecimal(((Number) body.get("targetPrice")).doubleValue()));
-        alert.setStatus(Alert.Status.valueOf((String) body.get("status")));
+
+        currencyService.validateCurrencyPrice(alertRequestModel.getTargetPrice());
+        alert.setTargetPrice(new BigDecimal(((Number) alertRequestModel.getTargetPrice()).doubleValue()));
+
+        alert.setStatus(alertRequestModel.getStatus());
+
         return alertRepository.save(alert);
     }
 
     @Override
-    public Alert update(Long id, String currencySymbol, BigDecimal targetPrice, Alert.Status status) {
+    public Alert update(Long id, String currencySymbol) {
+        currencyService.validateCurrencySymbol(currencySymbol);
+
         // Currency entity (from currencySymbol)
         Currency currency = currencyService.query(currencySymbol);
 
         // Alert entity to replace with new data
         Alert alert = findById(id);
+        alert.setCurrency(currency);
 
-        // Implementation of updates
-        if (currencySymbol != null)
-            alert.setCurrency(currency);
-        if (targetPrice != null)
-            alert.setTargetPrice(targetPrice);
-        if (status != null)
-            alert.setStatus(status);
+        return alertRepository.save(alert);
+    }
+
+    @Override
+    public Alert update(Long id, BigDecimal targetPrice) {
+        // Alert entity to replace with new data
+        Alert alert = findById(id);
+        alert.setTargetPrice(targetPrice);
+
+        return alertRepository.save(alert);
+    }
+
+    @Override
+    public Alert update(Long id, Alert.Status status) {
+        // Alert entity to replace with new data
+        Alert alert = findById(id);
+        alert.setStatus(status);
+
+        return alertRepository.save(alert);
+    }
+
+    @Override
+    public Alert update(Alert alert) {
+        currencyService.validateCurrencyPrice(alert.getTargetPrice());
+        currencyService.validateCurrencyName(alert.getCurrency().getName());
+        currencyService.validateCurrencySymbol(alert.getCurrency().getSymbol());
 
         return alertRepository.save(alert);
     }
