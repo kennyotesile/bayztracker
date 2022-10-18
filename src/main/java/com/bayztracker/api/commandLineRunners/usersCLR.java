@@ -1,6 +1,5 @@
 package com.bayztracker.api.commandLineRunners;
 
-import com.bayztracker.api.entities.User;
 import com.bayztracker.api.repositories.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,11 +19,11 @@ public class usersCLR implements CommandLineRunner {
     @Override
     public void run(String... args) {
 
-        userRepository.save(new User("user", "userpass", User.UserType.USER));
-        userRepository.save(new User("admin", "adminpass", User.UserType.ADMIN));
-
-        for (User user : userRepository.findAll()) {
-            logger.info("{}", user);
-        }
+//        userRepository.save(new User("user", "userpass", User.UserType.USER));
+//        userRepository.save(new User("admin", "adminpass", User.UserType.ADMIN));
+//
+//        for (User user : userRepository.findAll()) {
+//            logger.info("{}", user);
+//        }
     }
 }
