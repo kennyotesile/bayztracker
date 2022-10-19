@@ -1,7 +1,7 @@
 package com.bayztracker.api.services;
 
 import com.bayztracker.api.entities.AppUser;
-import com.bayztracker.api.entities.Roles;
+import com.bayztracker.api.entities.Role;
 import com.bayztracker.api.repositories.RoleRepository;
 import com.bayztracker.api.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,12 +17,10 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
 
-
     @Autowired
     private RoleRepository roleRepository;
 
     BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-
 
     @Override
     public void registerNewUser(AppUser user) {
@@ -31,16 +29,16 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void createRole(Roles roles) {
-        roleRepository.save(roles);
+    public void createRole(Role role) {
+        roleRepository.save(role);
     }
 
     @Override
     public void addRoleToUser(String username, String roleName) {
         Optional<AppUser> appUser = this.getUserWithUsername(username);
-        Roles roles = roleRepository.findByRole(roleName);
+        Role role = roleRepository.findByRole(roleName);
 
-        appUser.ifPresent(user -> user.getRole().add(roles));
+        appUser.ifPresent(user -> user.getRole().add(role));
     }
 
     @Override

@@ -7,28 +7,29 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 @Entity()
+@Table(name = "users")
 public class AppUser {
-
-//    public enum UserType {
-//        USER,
-//        ADMIN
-//    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(nullable = false)
     private String username;
+
+    @Column(nullable = false)
     private String password;
 
     @JsonIgnore
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "roles_id"))
-    private Collection<Roles> roles = new ArrayList<>();
+
+    private Collection<Role> roles = new ArrayList<>();
 
     public AppUser() {
     }
 
-    public AppUser(String username, String password, Collection<Roles> roles) {
+    public AppUser(String username, String password, Collection<Role> roles) {
         this.username = username;
         this.password = password;
         this.roles = roles;
@@ -58,12 +59,11 @@ public class AppUser {
         this.password = password;
     }
 
-
-    public Collection<Roles> getRole() {
+    public Collection<Role> getRole() {
         return roles;
     }
 
-    public void setRole(Collection<Roles> roles) {
+    public void setRole(Collection<Role> roles) {
         this.roles = roles;
     }
 }

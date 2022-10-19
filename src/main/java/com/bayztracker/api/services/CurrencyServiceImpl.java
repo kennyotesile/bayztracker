@@ -37,7 +37,7 @@ public class CurrencyServiceImpl implements CurrencyService {
         validateCurrency(currency);
 
         try {
-            Currency existingCurrency = query(currency.getSymbol());
+            query(currency.getSymbol());
             throw new RecordAlreadyExistsException("Currency with specified symbol already exists.");
         } catch (NotFoundException ex) {
             try {
@@ -65,7 +65,7 @@ public class CurrencyServiceImpl implements CurrencyService {
     public void validateCurrency(Currency currency) {
         validateCurrencySymbol(currency.getSymbol());
         validateCurrencyName(currency.getName());
-        validateCurrencyPrice(currency);
+        validateCurrencyPrice(currency.getCurrentPrice());
     }
 
     @Override

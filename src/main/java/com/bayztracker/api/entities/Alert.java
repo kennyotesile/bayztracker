@@ -5,10 +5,10 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "alert")
+@Table(name = "alerts")
 public class Alert {
 
     public enum Status {
@@ -28,13 +28,13 @@ public class Alert {
     @Column(nullable = false)
     private Status status = Status.NEW;
     @CreationTimestamp
-    private Date createdAt;
+    private LocalDateTime createdAt;
     @UpdateTimestamp
-    private Date updatedAt;
+    private LocalDateTime updatedAt;
 
     public Alert() {}
 
-    public Alert(Long id, Currency currency, BigDecimal targetPrice, Status status, Date createdAt, Date updatedAt) {
+    public Alert(Long id, Currency currency, BigDecimal targetPrice, Status status, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.id = id;
         this.currency = currency;
         this.targetPrice = targetPrice;
@@ -75,19 +75,19 @@ public class Alert {
         this.status = status;
     }
 
-    public Date getCreatedAt() {
+    public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(Date createdAt) {
+    public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
 
-    public Date getUpdatedAt() {
+    public LocalDateTime getUpdatedAt() {
         return updatedAt;
     }
 
-    public void setUpdatedAt(Date updatedAt) {
+    public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
     }
 }

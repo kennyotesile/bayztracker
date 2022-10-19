@@ -1,8 +1,8 @@
 package com.bayztracker.api.repositories;
 
-import com.bayztracker.api.entities.Roles;
+import com.bayztracker.api.entities.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface RoleRepository extends JpaRepository<Roles,Long> {
-    Roles findByRole(String role);
+public interface RoleRepository extends JpaRepository<Role,Long> {
+    Role findByRole(String role);
 }

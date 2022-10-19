@@ -5,9 +5,10 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Entity
+@Table(name = "currencies")
 public class Currency {
 
     @Id
@@ -24,16 +25,16 @@ public class Currency {
     private BigDecimal currentPrice;
 
     @CreationTimestamp
-    private Date createdTime;
+    private LocalDateTime createdTime;
 
     @UpdateTimestamp
-    private Date updatedTime;
+    private LocalDateTime updatedTime;
 
-    boolean enabled = false;
+    boolean enabled = true;
 
     public Currency() {}
 
-    public Currency(Long id, String name, String symbol, BigDecimal currentPrice, Date createdTime, Date updatedTime, boolean enabled) {
+    public Currency(Long id, String name, String symbol, BigDecimal currentPrice, LocalDateTime createdTime, LocalDateTime updatedTime, boolean enabled) {
         this.id = id;
         this.name = name;
         this.symbol = symbol;
@@ -75,19 +76,19 @@ public class Currency {
         this.currentPrice = currentPrice;
     }
 
-    public Date getCreatedTime() {
+    public LocalDateTime getCreatedTime() {
         return createdTime;
     }
 
-    public void setCreatedTime(Date createdTime) {
+    public void setCreatedTime(LocalDateTime createdTime) {
         this.createdTime = createdTime;
     }
 
-    public Date getUpdatedTime() {
+    public LocalDateTime getUpdatedTime() {
         return updatedTime;
     }
 
-    public void setUpdatedTime(Date updatedTime) {
+    public void setUpdatedTime(LocalDateTime updatedTime) {
         this.updatedTime = updatedTime;
     }
 
