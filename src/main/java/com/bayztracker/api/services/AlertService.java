@@ -22,4 +22,6 @@ public interface AlertService {
     Alert findById(Long id);
 
     List<Alert> findAll();
+
+    Alert changeAlertStatus(Long id, String newStatus);
 }

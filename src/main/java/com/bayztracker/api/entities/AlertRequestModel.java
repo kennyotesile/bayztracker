@@ -6,14 +6,12 @@ public class AlertRequestModel {
 
     private String currencySymbol;
     private BigDecimal targetPrice;
-    private Alert.Status status = Alert.Status.NEW;
 
     public AlertRequestModel() {}
 
-    public AlertRequestModel(String currencySymbol, BigDecimal targetPrice, Alert.Status status) {
+    public AlertRequestModel(String currencySymbol, BigDecimal targetPrice) {
         this.currencySymbol = currencySymbol;
         this.targetPrice = targetPrice;
-        this.status = status;
     }
 
     public String getCurrencySymbol() {
@@ -30,13 +28,5 @@ public class AlertRequestModel {
 
     public void setTargetPrice(BigDecimal targetPrice) {
         this.targetPrice = targetPrice;
-    }
-
-    public Alert.Status getStatus() {
-        return status;
-    }
-
-    public void setStatus(Alert.Status status) {
-        this.status = status;
     }
 }

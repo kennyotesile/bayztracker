@@ -2,10 +2,7 @@ package com.bayztracker.api.services;
 
 import com.bayztracker.api.constants.Constants;
 import com.bayztracker.api.entities.Currency;
-import com.bayztracker.api.exceptions.BadRequestException;
-import com.bayztracker.api.exceptions.NotFoundException;
-import com.bayztracker.api.exceptions.RecordAlreadyExistsException;
-import com.bayztracker.api.exceptions.UnsupportedCurrencyCreationException;
+import com.bayztracker.api.exceptions.*;
 import com.bayztracker.api.repositories.CurrencyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
