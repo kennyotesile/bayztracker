@@ -1,24 +1,34 @@
-version: "3.9"
+version: "3.5"
 
 services:
-  spring-boot-app:
-    build:
-      context: .
-      dockerfile: Dockerfile
+  mysql-db:
+    image: mysql:8.0.31
+    environment:
+      - MYSQL_ROOT_PASSWORD=pass
+      - MYSQL_DATABASE=bayztrackerdb
+      - MYSQL_USER=user
+      - MYSQL_PASSWORD=pass
     ports:
-      - "8080:8080"
-    restart: always
-    depends_on:
-      - mysql-db
+      - 3306:3306
+    restart: unless-stopped
     networks:
       - spring-boot-mysql
 
-  mysql-db:
-    image: mysql:8.0.31
-    env_file: .env
+  spring-boot-app:
+    image: spring-boot-app
+    build:
+      context: ./
+      dockerfile: Dockerfile
     ports:
-      - "3306:3306"
-    restart: always
+      - 8080:8080
+    restart: on-failure
+    environment:
+      - spring.datasource.url=jdbc:mysql://mysql-db:3306/bayztrackerdb?allowPublicKeyRetrieval=true&useSSL=false
+      - spring.datasource.username=user
+      - spring.datasource.password=pass
+      - spring.jpa.hibernate.ddl-auto=create
+    depends_on:
+      - mysql-db
     networks:
       - spring-boot-mysql
 

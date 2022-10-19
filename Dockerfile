@@ -1,3 +1,4 @@
 FROM amazoncorretto:8
-COPY target/*.jar BayzTracker.jar
-ENTRYPOINT ["java","-jar","/BayzTracker.jar"]
+ADD target/*.jar Bayztracker.jar
+EXPOSE 8080
+ENTRYPOINT ["java","-jar","Bayztracker.jar"]
