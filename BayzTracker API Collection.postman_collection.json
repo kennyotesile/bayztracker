@@ -16,7 +16,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Nigerian Naira\",\r\n    \"symbol\": \"NGN\",\r\n    \"currentPrice\": 1,\r\n    \"enabled\": false\r\n}",
+							"raw": "{\r\n    \"name\": \"Dogecoin\",\r\n    \"symbol\": \"D\",\r\n    \"currentPrice\": 10\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -41,13 +41,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base-url}}/currencies/eeh",
+							"raw": "{{base-url}}/currencies/d",
 							"host": [
 								"{{base-url}}"
 							],
 							"path": [
 								"currencies",
-								"eeh"
+								"d"
 							]
 						}
 					},
@@ -76,13 +76,13 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{base-url}}/currencies/1",
+							"raw": "{{base-url}}/currencies/d",
 							"host": [
 								"{{base-url}}"
 							],
 							"path": [
 								"currencies",
-								"1"
+								"d"
 							]
 						}
 					},
@@ -100,7 +100,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"currencySymbol\": \"NGN\",\n    \"targetPrice\": 100,\n    \"status\": \"NEW\"\n}",
+							"raw": "{\n    \"currencySymbol\": \"D\",\n    \"targetPrice\": 100,\n    \"status\": \"NEW\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -122,38 +122,11 @@
 				{
 					"name": "Edit Alert",
 					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"currencySymbol\": \"\",\n    \"targetPrice\": 1.0,\n    \"status\": \"NEW\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{base-url}}/alerts/1",
-							"host": [
-								"{{base-url}}"
-							],
-							"path": [
-								"alerts",
-								"1"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Edit Alert Partially",
-					"request": {
 						"method": "PATCH",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"currencySymbol\": \"\",\n    \"targetPrice\": 1.0,\n    \"status\": \"NEW\"\n}",
+							"raw": "{\n    \"currencySymbol\": \"D\",\n    \"targetPrice\": 9.0\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -176,7 +149,7 @@
 				{
 					"name": "Acknowledge Alert",
 					"request": {
-						"method": "POST",
+						"method": "PATCH",
 						"header": [],
 						"url": {
 							"raw": "{{base-url}}/alerts/1?status=ACKED",
@@ -200,7 +173,7 @@
 				{
 					"name": "Cancel Alert",
 					"request": {
-						"method": "POST",
+						"method": "PATCH",
 						"header": [],
 						"url": {
 							"raw": "{{base-url}}/alerts/1?status=CANCELLED",
@@ -245,13 +218,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base-url}}/alerts/3",
+							"raw": "{{base-url}}/alerts/1",
 							"host": [
 								"{{base-url}}"
 							],
 							"path": [
 								"alerts",
-								"3"
+								"1"
 							]
 						}
 					},
@@ -280,13 +253,13 @@
 			"name": "Auth",
 			"item": [
 				{
-					"name": "Sign In",
+					"name": "Log In",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"username\": \"user\",\n    \"password\": \"userpass\"\n}",
+							"raw": "{\n    \"username\": \"admin\",\n    \"password\": \"pass\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -294,13 +267,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{base-url}}/auth/signin",
+							"raw": "{{base-url}}/login",
 							"host": [
 								"{{base-url}}"
 							],
 							"path": [
-								"auth",
-								"signin"
+								"login"
 							]
 						}
 					},

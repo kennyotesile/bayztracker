@@ -2,6 +2,7 @@ package com.bayztracker.api.controllers;
 
 import com.bayztracker.api.entities.Alert;
 import com.bayztracker.api.entities.AlertRequestModel;
+import com.bayztracker.api.exceptions.BadRequestException;
 import com.bayztracker.api.services.AlertService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,38 +26,55 @@ public class AlertController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Alert> editAlert(@PathVariable Long id, @RequestParam(required = false) Map<String, Object> params) {
-        // Data to update the existing alert entity with (from request parameters)
-        String currencySymbol;
-        BigDecimal targetPrice;
-        Alert.Status status;
+    public ResponseEntity<Alert> editAlert(@PathVariable Long id, @RequestParam(required = false) Map<String, Object> params, @RequestBody(required = false) Map<String, Object> body) throws Exception {
+        if (!(params.isEmpty()) && body == null) { // when there is/are request PARAM(S) but no body
+            Alert updatedAlert;
 
-        Alert updatedAlert = new Alert();
+            if (params.containsKey("status")) {
+                Alert.Status alertStatus = Alert.Status.valueOf(((String) params.get("status")).toUpperCase());
+                System.out.println(alertStatus);
+                updatedAlert = alertService.update(id, alertStatus);
 
-        if (params.containsKey("currencySymbol")) {
-            currencySymbol = (String) params.get("currencySymbol");
-            updatedAlert = alertService.update(id, currencySymbol);
-        }
-        if (params.containsKey("targetPrice")) {
-            targetPrice = (BigDecimal) params.get("targetPrice");
-            updatedAlert = alertService.update(id, targetPrice);
-        }
-        if (params.containsKey("status")) {
-            status = (Alert.Status) params.get("status");
-            updatedAlert = alertService.update(id, status);
-        }
+                return ResponseEntity.status(HttpStatus.OK).body(updatedAlert);
+            } else {
+                throw new Exception("Unknown request");
+            }
+        } else if (!(body.isEmpty()) && params.isEmpty()) { // when there is BODY but no parameter(s)
+            // Data to update the existing alert entity with (from request parameters)
+            String currencySymbol;
+            BigDecimal targetPrice;
 
-        return ResponseEntity.status(HttpStatus.OK).body(updatedAlert);
+            if (body.containsKey("currencySymbol")) {
+                currencySymbol = (String) body.get("currencySymbol");
+                alertService.update(id, currencySymbol);
+            }
+            if (body.containsKey("targetPrice")) {
+                if (body.get("targetPrice") instanceof BigDecimal)
+                    targetPrice = (BigDecimal) body.get("targetPrice");
+                else if (body.get("targetPrice") instanceof Number)
+                    targetPrice = new BigDecimal(body.get("targetPrice").toString());
+                else if (body.get("targetPrice") instanceof String)
+                    targetPrice = new BigDecimal((String) body.get("targetPrice"));
+                else throw new BadRequestException("Target price must be a valid amount in figures");
+
+                alertService.update(id, targetPrice);
+            }
+
+//            alertService.update(id, Alert.Status.NEW);
+            return ResponseEntity.status(HttpStatus.OK).body(alertService.findById(id));
+        } else {
+            throw new BadRequestException("Bad request made");
+        }
+    }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<Alert> patchAlert(@PathVariable Long id, @RequestParam(required = false) Map<String, Object> params, @RequestBody(required = false) Map<String, Object> body) throws Exception {
+        return editAlert(id, params, body);
     }
 
     @DeleteMapping("/{id}")
     public void deleteAlert(@PathVariable Long id) {
         alertService.deleteById(id);
-    }
-
-    @PatchMapping("/{id}")
-    public ResponseEntity<Alert> patchAlert(@PathVariable Long id, @RequestParam(required = false) Map<String, Object> params) {
-        return editAlert(id, params);
     }
 
     @GetMapping("/{id}")

@@ -35,7 +35,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(POST, "/login/**").permitAll()
                 .antMatchers(POST, "/logout").permitAll()
 
-                .antMatchers(GET, "/").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
+                .antMatchers(GET, "/").permitAll()
 
                 .antMatchers(POST, "/currencies").hasAnyAuthority("ROLE_ADMIN")
                 .antMatchers(GET, "/currencies/**").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
@@ -45,7 +45,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(POST, "/alerts").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
                 .antMatchers(PUT, "/alerts/**").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
                 .antMatchers(PATCH, "/alerts/**").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
-                .antMatchers(POST, "/alerts/**").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
+                .antMatchers(POST, "/alerts/:alert?status=*").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
                 .antMatchers(DELETE, "/alerts/**").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
                 .antMatchers(GET, "/alerts/**").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
                 .antMatchers(GET, "/alerts").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
