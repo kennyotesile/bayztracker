@@ -1,0 +1,284 @@
+{
+	"info": {
+		"_postman_id": "6ff71f70-5bce-41bd-a958-0a21265f152c",
+		"name": "BayzTracker API Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19949796"
+	},
+	"item": [
+		{
+			"name": "Currencies",
+			"item": [
+				{
+					"name": "Add Currency",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Dogecoin\",\r\n    \"symbol\": \"D\",\r\n    \"currentPrice\": 10\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/currencies",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"currencies"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Query Single Currency",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base-url}}/currencies/d",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"currencies",
+								"d"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Query All Currencies",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base-url}}/currencies",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"currencies"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove Currency",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base-url}}/currencies/d",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"currencies",
+								"d"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Alerts",
+			"item": [
+				{
+					"name": "Create Alert",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"currencySymbol\": \"D\",\n    \"targetPrice\": 100,\n    \"status\": \"NEW\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/alerts",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"alerts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Alert",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"currencySymbol\": \"D\",\n    \"targetPrice\": 9.0\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/alerts/1",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"alerts",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Acknowledge Alert",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{base-url}}/alerts/1?status=ACKED",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"alerts",
+								"1"
+							],
+							"query": [
+								{
+									"key": "status",
+									"value": "ACKED"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cancel Alert",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{base-url}}/alerts/1?status=CANCELLED",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"alerts",
+								"1"
+							],
+							"query": [
+								{
+									"key": "status",
+									"value": "CANCELLED"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Alert",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base-url}}/alerts/1",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"alerts",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Alert",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base-url}}/alerts/1",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"alerts",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Alerts",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base-url}}/alerts",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"alerts"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Log In",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"admin\",\n    \"password\": \"pass\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/login",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
