@@ -18,7 +18,7 @@ The admin user also manages the currencies that will be listed on the app.
 
 ## General Application Constraints
 - Users are using BayzTracker mobile app, assume that the API is only consumed by mobile
-- Data should only be accepted from the registered users with their ownership rights.
+- Data is only accepted from the registered users with their ownership rights.
 - There are two types of users: Admin and User.
     - Both user types can create alerts.
     - Both users can query currencies.
@@ -43,9 +43,3 @@ The admin user also manages the currencies that will be listed on the app.
 3. A ScheduleTask class that checks the alerts and notifies the users if the target price is reached
     - A simple log on console for notification. Email or push notification is not implemented.
     - ScheduledTask runs every 30 seconds.
-
-- Make sure that project is building correctly.
-- Make sure that all tests are passing.
-- Prepare necessary instructions to run your application in `DOC.md` file.
-- If you have questions, please send us an email, we'll get back to you as soon as possible.
-- You have 7 days to complete this task. 
