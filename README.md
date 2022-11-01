@@ -9,12 +9,12 @@ The admin user also manages the currencies that will be listed on the app.
 
 ## Tech stack
 - [Spring Boot](https://spring.io/projects/spring-boot)
-- Java 8+ or Kotlin
-- Gradle or Maven
+- Java 8+
+- Maven
 - Spring Data JPA
 - Hibernate
-- MySQL or PostgreSQL
-- GIT for version control
+- MySQL
+- GIT
 
 ## General Application Constraints
 - Users are using BayzTracker mobile app, assume that the API is only consumed by mobile
